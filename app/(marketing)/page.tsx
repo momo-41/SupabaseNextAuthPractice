@@ -170,6 +170,24 @@ export default function page() {
           </p>
         </div>
       </section>
+      <section id="contact" className="containe py-8 md:py-12 lg:py-24">
+        <div className="max-w-[58rem] mx-auto text-center flex flex-col gap-4">
+          <h2 className="font-extrabold text-3xl md:text-6xl">Contact Me</h2>
+          <p className="text-muted-foreground sm:text-lg sm:leading-7">
+            もしWebサービスが気に入った場合は下記からご連絡ください。
+            <br />
+            お仕事のご連絡もお待ちしております。
+          </p>
+          <Link
+            href={siteConfig.links.x}
+            className="underline underline-offset-4"
+            target="_blank"
+            rel="noreferrer"
+          >
+            お仕事はXまで
+          </Link>
+        </div>
+      </section>
     </>
   );
 }
