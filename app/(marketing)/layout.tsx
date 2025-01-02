@@ -1,6 +1,7 @@
 //(marketing)に共通のhtmlやcssはここで記述する
 
 import MainNav from "@/components/MainNav";
+import SiteFooter from "@/components/SiteFooter";
 import { buttonVariants } from "@/components/ui/button";
 import { marketingConfig } from "@/config/marketing";
 import { cn } from "@/lib/utils";
@@ -31,6 +32,7 @@ export default function MarketingLayout({
         </div>
       </header>
       <main>{children}</main>
+      <SiteFooter />
     </div>
   );
 }
