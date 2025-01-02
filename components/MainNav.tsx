@@ -1,6 +1,13 @@
+import { NavItem } from "@/types";
 import Link from "next/link";
+import { ReactNode } from "react";
 
-export default function MainNav() {
+interface MainNavProps {
+  items?: NavItem[];
+  children?: ReactNode;
+}
+
+export default function MainNav({ items }: MainNavProps) {
   return (
     <div className="flex items-center md:gap-10">
       <Link href={"/"} className="hidden md:flex items-center space-x-2">
@@ -8,18 +15,15 @@ export default function MainNav() {
       </Link>
       <nav className="md:flex gap-6 hidden">
         {/* md:は768px以上 */}
-        <Link
-          href={"/blog"}
-          className="text-lg sm:text-sm font-medium hover:text-foreground/80"
-        >
-          ブログ
-        </Link>
-        <Link
-          href={"#feature"}
-          className="text-lg sm:text-sm font-medium hover:text-foreground/80"
-        >
-          特徴
-        </Link>
+        {items?.map((item, index) => (
+          <Link
+            key={index} //削除や並び替えなどがある場合はindexをkeyとして使うのはよくない
+            href={item.href}
+            className="text-lg sm:text-sm font-medium hover:text-foreground/80"
+          >
+            {item.title}
+          </Link>
+        ))}
       </nav>
     </div>
   );
