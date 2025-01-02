@@ -1,13 +1,19 @@
+"use client";
+
 import { NavItem } from "@/types";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import MobileNav from "./MobileNav";
 
 interface MainNavProps {
-  items?: NavItem[];
+  items: NavItem[];
   children?: ReactNode;
 }
 
 export default function MainNav({ items }: MainNavProps) {
+  //押したか押してないかの状態変数を定義
+  const [showMobileMenu, setshowMobileMenu] = useState<boolean>(false);
+
   return (
     <div className="flex items-center md:gap-10">
       <Link href={"/"} className="hidden md:flex items-center space-x-2">
@@ -25,6 +31,15 @@ export default function MainNav({ items }: MainNavProps) {
           </Link>
         ))}
       </nav>
+      {/* 以下はスマホサイズ用のhtmlとcss */}
+      <button
+        className="md:hidden"
+        onClick={() => setshowMobileMenu(!showMobileMenu)}
+      >
+        <span>メニュー</span>
+      </button>
+      {/* showMobileMenuがtrueのとき <MobileNav/> を表示 */}
+      {showMobileMenu && <MobileNav items={items} />}
     </div>
   );
 }
