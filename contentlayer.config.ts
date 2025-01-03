@@ -17,6 +17,10 @@ export const Post = defineDocumentType(() => ({
       type: "string",
       resolve: (doc) => `/${doc._raw.flattenedPath}`,
     }, // slugを呼び出したら自動的にファイル名にアクセスして、そのままブログのid(スラグ)になる (blog/page.tsx参照)
+    slugAsParams: {
+      type: "string",
+      resolve: (doc) => doc._raw.flattenedPath.split("/").splice(1)[0],
+    },
   },
 }));
 
