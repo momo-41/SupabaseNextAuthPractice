@@ -6,12 +6,46 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Mdx from "@/components/MdxComponent";
+import { Metadata } from "next";
+import { siteConfig } from "@/config/site";
 
 //slugという名前で作ったのでslug
 async function getPostFromSlug(slug: string) {
   const post = allPosts.find((post) => post.slugAsParams === slug); // allPostsにあるslugとパラメーターから取得したslugが一致したら返す
 
   return post;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const page = await getPostFromSlug(params.slug);
+
+  if (!page) {
+    return {};
+  }
+
+  return {
+    title: page.title,
+    description: page.description,
+    openGraph: {
+      type: "article",
+      locale: "ja",
+      title: siteConfig.name,
+      description: siteConfig.description,
+      siteName: siteConfig.name,
+      // images:[] // OG画像というのを入れる
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteConfig.name,
+      description: siteConfig.description,
+      // images: [`${siteConfig.url}/og.jpg`],
+      creator: "@momocode",
+    },
+  };
 }
 
 export default async function PostPage({
