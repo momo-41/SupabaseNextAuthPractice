@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import Mdx from "@/components/MdxComponent";
 
 //slugという名前で作ったのでslug
 async function getPostFromSlug(slug: string) {
@@ -44,7 +45,7 @@ export default async function PostPage({
           className="my-8 border rounded-sm bg-muted"
         />
       )}
-      <div>{post?.body.html}</div>
+      <Mdx code={post?.body.code || ""} />
       <hr className="mt-12" />
       <div className="py-6 text-center lg:py-10">
         <Link
